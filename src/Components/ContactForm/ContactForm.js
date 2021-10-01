@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 import s from 'Components/ContactForm/ContactForm.module.css';
+import PropTypes from 'prop-types';
 
 export default class ContactForm extends Component {
   state = {
@@ -30,13 +31,13 @@ export default class ContactForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className="">
-          <label htmlFor={this.nameRandomId}>
+        <form onSubmit={this.handleSubmit} className={s.form}>
+          <label className={s.label} htmlFor={this.nameRandomId}>
             Name:
             <input
               onChange={this.handleChange}
               value={this.state.name}
-              className=""
+              className={s.input}
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -45,7 +46,7 @@ export default class ContactForm extends Component {
             />
           </label>
 
-          <label htmlFor={this.numberRandomId}>
+          <label htmlFor={this.numberRandomId} className={s.label}>
             Number:
             <input
               className="{ }"
@@ -59,7 +60,7 @@ export default class ContactForm extends Component {
               required
             />
           </label>
-          <button type="submit" className="{ }">
+          <button type="submit" className={s.btn}>
             Add Contact
           </button>
         </form>
@@ -67,3 +68,7 @@ export default class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
