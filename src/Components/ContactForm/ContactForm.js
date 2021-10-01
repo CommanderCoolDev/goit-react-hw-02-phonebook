@@ -5,9 +5,11 @@ import s from 'Components/ContactForm/ContactForm.module.css';
 export default class ContactForm extends Component {
   state = {
     name: '',
+    number: '',
   };
 
   nameRandomId = shortid.generate();
+  numberRandomId = shortid.generate();
 
   handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -22,17 +24,16 @@ export default class ContactForm extends Component {
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="">
-          <label>
+          <label htmlFor={this.nameRandomId}>
             Name:
             <input
-              htmlFor={this.nameRandomId}
               onChange={this.handleChange}
               value={this.state.name}
               className=""
@@ -43,7 +44,22 @@ export default class ContactForm extends Component {
               required
             />
           </label>
-          <button type="submit" className="">
+
+          <label htmlFor={this.numberRandomId}>
+            Number:
+            <input
+              className="{ }"
+              value={this.state.number}
+              id={this.numberRandomId}
+              onChange={this.handleChange}
+              name="number"
+              type="tel"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+              required
+            />
+          </label>
+          <button type="submit" className="{ }">
             Add Contact
           </button>
         </form>
